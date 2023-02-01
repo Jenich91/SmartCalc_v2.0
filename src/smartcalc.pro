@@ -1,5 +1,5 @@
 QT       += core gui printsupport
-TARGET = s21_smartcalc_v2.0
+TARGET = sfleta_smartcalc_v2.0
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17

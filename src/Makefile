@@ -13,7 +13,7 @@ LDFLAGS = -lgtest
 TEST_SRCS = tests.cc
 SRCS = model.cc controller.cc view.cc model.h controller.h view.h
 VERSION = v2.0
-FILENAME = s21_$(PROJECT_NAME)_$(VERSION)
+FILENAME = sfleta_$(PROJECT_NAME)_$(VERSION)
 OS := $(shell uname)
 
 ifeq ($(OS), Linux)
