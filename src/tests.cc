@@ -6,7 +6,7 @@
 const double eps = 1e-6;
 
 TEST(operators, plus) {
-  s21::Model model;
+  sfleta_::Model model;
 
   std::string inputStr = "2.0+3.32";
   ASSERT_TRUE(model.IsNormalInputString(inputStr));
@@ -52,7 +52,7 @@ TEST(operators, plus) {
 }
 
 TEST(operators, test_minus) {
-  s21::Model model;
+  sfleta_::Model model;
 
   std::string inputStr = "416-434";
   double result = 416 - 434;
@@ -104,7 +104,7 @@ TEST(operators, test_minus) {
 }
 
 TEST(operators, test_mult) {
-  s21::Model model;
+  sfleta_::Model model;
 
   std::string inputStr = "65991.0*(0.5312*5213.0)*-(0.9450*897643.0)";
   double result = 65991.0 * (0.5312 * 5213.0) * -(0.9450 * 897643.0);
@@ -150,7 +150,7 @@ TEST(operators, test_mult) {
 }
 
 TEST(operators, test_div) {
-  s21::Model model;
+  sfleta_::Model model;
 
   std::string inputStr = "(432/9.57/321)/(76.4/78.0)/-35.8";
   double result = (432 / 9.57 / 321) / (76.4 / 78.0) / -35.8;
@@ -202,7 +202,7 @@ TEST(operators, test_div) {
 }
 
 TEST(operators, test_pow) {
-  s21::Model model;
+  sfleta_::Model model;
 
   std::string inputStr = "8^(3^4)";
   double result = pow(8, pow(3, 4));
@@ -248,7 +248,7 @@ TEST(operators, test_pow) {
 }
 
 TEST(operators, test_mod) {
-  s21::Model model;
+  sfleta_::Model model;
 
   std::string inputStr = "(45.34mod55.23)mod79.4";
   double result = fmod(fmod(45.34, 55.23), 79.4);
@@ -299,7 +299,7 @@ TEST(operators, test_mod) {
 }
 
 TEST(operators, test_mix) {
-  s21::Model model;
+  sfleta_::Model model;
 
   std::string inputStr = "(72*533+-615)";
   double result = (72 * 533 + -615);
@@ -333,7 +333,7 @@ TEST(operators, test_mix) {
 }
 
 TEST(functions, test_etc) {
-  s21::Model model;
+  sfleta_::Model model;
 
   std::string inputStr = "34.4+34/3";
   model.SetInputString(inputStr);
@@ -386,7 +386,7 @@ TEST(functions, test_etc) {
 }
 
 TEST(sci_notation, test_func) {
-  s21::Model model;
+  sfleta_::Model model;
 
   std::string inputStr = "acos(0.1)*sin(1)";
   double result = acos(0.1) * sin(1);
@@ -449,7 +449,7 @@ TEST(sci_notation, test_func) {
 }
 
 TEST(sci_notation, test_sci_notation) {
-  s21::Model model;
+  sfleta_::Model model;
 
   std::string inputStr = "10e2";
   double result = 10e2;
@@ -510,7 +510,7 @@ TEST(sci_notation, test_sci_notation) {
 }
 
 TEST(x, test_x) {
-  s21::Model model;
+  sfleta_::Model model;
   std::string inputStr = "-x";
   ASSERT_TRUE(model.IsNormalInputString(inputStr));
 
@@ -531,7 +531,7 @@ TEST(x, test_x) {
 }
 
 TEST(credit, test_credit) {
-  s21::Model model;
+  sfleta_::Model model;
 
   double result = model.CreditCalc(100000, 12, 15, 1);
   EXPECT_NEAR(9025.83, result, 1e-2);

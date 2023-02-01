@@ -3,7 +3,7 @@
 #include "controller.h"
 #include "ui_mainqt.h"
 
-s21::View::View(s21::Controller *c, QWidget *parent)
+sfleta_::View::View(sfleta_::Controller *c, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainQT), controller(c) {
   ui->setupUi(this);
 
@@ -53,7 +53,7 @@ s21::View::View(s21::Controller *c, QWidget *parent)
   connect(ui->Button_log, SIGNAL(clicked()), this, SLOT(push_button_func()));
 }
 
-void s21::View::keyPressEvent(QKeyEvent *event) {
+void sfleta_::View::keyPressEvent(QKeyEvent *event) {
   if (event->modifiers() == Qt::SHIFT) {
     switch (event->key()) {
       case Qt::Key_C:
@@ -189,9 +189,9 @@ void s21::View::keyPressEvent(QKeyEvent *event) {
   }
 }
 
-s21::View::~View() { delete ui; }
+sfleta_::View::~View() { delete ui; }
 
-void s21::View::on_Button_reset_clicked() {
+void sfleta_::View::on_Button_reset_clicked() {
   ui->inputTextField->clearFocus();
   ui->inputTextField->clear();
 
@@ -204,11 +204,11 @@ void s21::View::on_Button_reset_clicked() {
   controller->Reset();
 }
 
-void s21::View::showToolTipEnterX() {
+void sfleta_::View::showToolTipEnterX() {
   QToolTip::showText(ui->lineEdit_x->mapToGlobal(QPoint()), "Enter x value!");
 }
 
-void s21::View::on_Button_result_clicked() {
+void sfleta_::View::on_Button_result_clicked() {
   if (ui->display->text() != "0" && !ui->inputTextField->hasFocus() &&
       ui->display->text() != "ERROR!" && ui->Button_result->isChecked()) {
     ui->inputTextField->setText(ui->inputTextField->text() +
@@ -239,7 +239,7 @@ void s21::View::on_Button_result_clicked() {
   }
 }
 
-void s21::View::push_button_digit() {
+void sfleta_::View::push_button_digit() {
   if (ui->display->text() == "0" || ui->display->text() == "ERROR!" ||
       ui->Button_result->isChecked()) {
     ui->Button_result->setChecked(false);
@@ -251,7 +251,7 @@ void s21::View::push_button_digit() {
   ui->display->setText(ui->display->text() + pushButtonObj->text());
 }
 
-void s21::View::push_button_func() {
+void sfleta_::View::push_button_func() {
   QPushButton *pushButtonObj = (QPushButton *)sender();
 
   if (ui->display->text() == "0" || ui->display->text() == "ERROR!" ||
@@ -264,7 +264,7 @@ void s21::View::push_button_func() {
   ui->display->setText(ui->display->text() + pushButtonObj->text() + "(");
 }
 
-void s21::View::push_button_operator() {
+void sfleta_::View::push_button_operator() {
   QPushButton *pushButtonObj = (QPushButton *)sender();
   if (IsEqualDouble(ui->display->text().toDouble(), 0.0f) &&
       pushButtonObj->text() == '/') {
@@ -284,7 +284,7 @@ void s21::View::push_button_operator() {
   }
 }
 
-void s21::View::on_Button_dot_clicked() {
+void sfleta_::View::on_Button_dot_clicked() {
   if (ui->display->text() != "ERROR!" && !ui->Button_result->isChecked()) {
     if (!ui->display->text().contains('.')) {
       ui->display->setText(ui->display->text() + ".");
@@ -292,7 +292,7 @@ void s21::View::on_Button_dot_clicked() {
   }
 }
 
-void s21::View::on_Button_sign_clicked() {
+void sfleta_::View::on_Button_sign_clicked() {
   if (ui->display->text() != ("0") && ui->display->text() != "ERROR!") {
     if (ui->display->text().toDouble()) {
       ui->display->setText(
@@ -306,7 +306,7 @@ void s21::View::on_Button_sign_clicked() {
   }
 }
 
-void s21::View::on_Button_Graphic_clicked() {
+void sfleta_::View::on_Button_Graphic_clicked() {
   if (ui->inputTextField->text().isEmpty() && !ui->display->text().isEmpty()) {
     ui->inputTextField->setText(ui->display->text());
   }
@@ -356,16 +356,16 @@ void s21::View::on_Button_Graphic_clicked() {
   }
 }
 
-void s21::View::on_Button_ClearGraph_clicked() {
+void sfleta_::View::on_Button_ClearGraph_clicked() {
   ui->Graph->clearGraphs();
   ui->Graph->replot();
 }
 
-void s21::View::on_lineEdit_x_editingFinished() {
+void sfleta_::View::on_lineEdit_x_editingFinished() {
   ui->lineEdit_x->setValidator(new QDoubleValidator(0, 100, 2, this));
 }
 
-void s21::View::on_button_calc_credit_clicked() {
+void sfleta_::View::on_button_calc_credit_clicked() {
   while (ui->tableWidget->rowCount() > 0) {
     ui->tableWidget->removeRow(0);
   }
@@ -442,7 +442,7 @@ void s21::View::on_button_calc_credit_clicked() {
   }
 }
 
-void s21::View::on_button_clear_credit_clicked() {
+void sfleta_::View::on_button_clear_credit_clicked() {
   ui->credit_result_1->setText("0");
   ui->credit_result_2->setText("0");
   ui->credit_result_3->setText("0");

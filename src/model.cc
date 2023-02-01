@@ -1,12 +1,12 @@
 #include "model.h"
-void s21::Model::ResetValues() {
+void sfleta_::Model::ResetValues() {
   inputString.clear();
   outputString.clear();
   charStack = {};
   doubleStack = {};
 }
 
-bool s21::Model::IsNormalInputString(const std::string& inputStr) {
+bool sfleta_::Model::IsNormalInputString(const std::string& inputStr) {
   if (inputStr.empty() || inputStr.length() > 255 ||
       !CheckCharacters(inputStr)) {
     return false;
@@ -19,7 +19,7 @@ bool s21::Model::IsNormalInputString(const std::string& inputStr) {
           CheckOperator(tmpStr) && CheckScientificNotation(tmpStr));
 }
 
-bool s21::Model::CheckCharacters(const std::string& inputStr) {
+bool sfleta_::Model::CheckCharacters(const std::string& inputStr) {
   for (auto i = inputStr.begin(); i < inputStr.end(); ++i) {
     if (IsFuncName(i) || IsMod(i)) {
       while (isalpha(*i)) {
@@ -32,7 +32,7 @@ bool s21::Model::CheckCharacters(const std::string& inputStr) {
   return true;
 }
 
-bool s21::Model::IsFuncName(std::string::const_iterator i) {
+bool sfleta_::Model::IsFuncName(std::string::const_iterator i) {
   std::string tempStr{};
   while (isalpha(*i)) {
     tempStr.push_back(*i);
@@ -43,22 +43,22 @@ bool s21::Model::IsFuncName(std::string::const_iterator i) {
          (tempStr == "sqrt") || (tempStr == "ln") || (tempStr == "log");
 }
 
-bool s21::Model::IsLegalChar(const char ch) {
+bool sfleta_::Model::IsLegalChar(const char ch) {
   const char* operators = "-+/*^xe().1234567890";
   return (strchr(operators, (int)ch) != NULL);
 }
 
-bool s21::Model::IsOperator(const char ch) {
+bool sfleta_::Model::IsOperator(const char ch) {
   const char* operators = "%-+/*^u";
   return (strchr(operators, (int)ch) != NULL);
 }
 
-bool s21::Model::IsFuncShortname(const char ch) {
+bool sfleta_::Model::IsFuncShortname(const char ch) {
   const char* operators = "SsCcTtqLl";
   return (strchr(operators, (int)ch) != NULL);
 }
 
-bool s21::Model::CheckDot(const std::string& inputStr) {
+bool sfleta_::Model::CheckDot(const std::string& inputStr) {
   for (auto i = inputStr.begin()++; i < inputStr.end()--; ++i) {
     auto prev = std::prev(i, 1);
     auto next = std::next(i, 1);
@@ -70,7 +70,7 @@ bool s21::Model::CheckDot(const std::string& inputStr) {
   return true;
 }
 
-void s21::Model::ReplaceUnarySign(std::string* inputStr) {
+void sfleta_::Model::ReplaceUnarySign(std::string* inputStr) {
   auto end = (*inputStr).end()--;
   for (auto i = (*inputStr).begin()++; i < end; ++i) {
     auto prev = std::prev(i, 1);
@@ -93,12 +93,12 @@ void s21::Model::ReplaceUnarySign(std::string* inputStr) {
   RemoveSpace(inputStr);
 }
 
-void s21::Model::RemoveSpace(std::string* inputStr) {
+void sfleta_::Model::RemoveSpace(std::string* inputStr) {
   (*inputStr).erase(std::remove((*inputStr).begin(), (*inputStr).end(), ' '),
                     (*inputStr).end());
 }
 
-bool s21::Model::CheckBracket(const std::string& inputStr) {
+bool sfleta_::Model::CheckBracket(const std::string& inputStr) {
   if (inputStr[0] == ')') {
     return false;
   }
@@ -130,7 +130,7 @@ bool s21::Model::CheckBracket(const std::string& inputStr) {
   return open_bracket_count == close_bracket_count;
 }
 
-bool s21::Model::CheckOperator(const std::string& inputStr) {
+bool sfleta_::Model::CheckOperator(const std::string& inputStr) {
   if (IsOperator(*inputStr.begin()) && *inputStr.begin() != 'u') {
     return false;
   }
@@ -144,7 +144,7 @@ bool s21::Model::CheckOperator(const std::string& inputStr) {
   return true;
 }
 
-bool s21::Model::CheckScientificNotation(const std::string& inputStr) {
+bool sfleta_::Model::CheckScientificNotation(const std::string& inputStr) {
   std::regex reg1("e[\\d\\+\\-]\\d*\\.[\\d]|e[\\d\\+\\-]\\d*\\.$");
   std::regex reg2("e[\\+\\-]{2}\\d*");
   std::regex reg3("^e|[^\\d]e|e[^\\d\\+\\-]|e$");
@@ -153,7 +153,7 @@ bool s21::Model::CheckScientificNotation(const std::string& inputStr) {
          !std::regex_search(inputStr, reg3);
 }
 
-bool s21::Model::CheckFuncName(const std::string& inputStr) {
+bool sfleta_::Model::CheckFuncName(const std::string& inputStr) {
   for (std::string::const_iterator i = inputStr.begin(); i < inputStr.end()--;
        ++i) {
     auto next = std::next(i, 1);
@@ -169,7 +169,7 @@ bool s21::Model::CheckFuncName(const std::string& inputStr) {
   return true;
 }
 
-bool s21::Model::IsMod(std::string::const_iterator i) {
+bool sfleta_::Model::IsMod(std::string::const_iterator i) {
   std::string tempStr{};
   int j = 0;
   while (isalpha(*i) && j < 3) {
@@ -180,13 +180,13 @@ bool s21::Model::IsMod(std::string::const_iterator i) {
   return tempStr == "mod";
 }
 
-void s21::Model::PrepareToCalc() {
+void sfleta_::Model::PrepareToCalc() {
   ReplaceFuncName(&inputString);
   ReplaceUnarySign(&inputString);
   ParseToPolishNotation();
 }
 
-void s21::Model::ParseToPolishNotation() {
+void sfleta_::Model::ParseToPolishNotation() {
   for (auto i = inputString.begin(); i < inputString.end(); i++) {
     // Число - добавляем в строку вывода
     if (*i == 'x') {
@@ -243,7 +243,7 @@ void s21::Model::ParseToPolishNotation() {
   }
 }
 
-int s21::Model::CheckPriority(char ch1) {
+int sfleta_::Model::CheckPriority(char ch1) {
   int chPrior = 0;
   switch (ch1) {
     case '(':
@@ -275,15 +275,15 @@ int s21::Model::CheckPriority(char ch1) {
   return chPrior;
 }
 
-double s21::Model::GetResult() { return Calculate(x); }
+double sfleta_::Model::GetResult() { return Calculate(x); }
 
-auto s21::Model::PopToDoublestack() {
+auto sfleta_::Model::PopToDoublestack() {
   auto v = std::move(doubleStack.top());
   doubleStack.pop();
   return v;
 }
 
-void s21::Model::CalcOperator(std::string::const_iterator i) {
+void sfleta_::Model::CalcOperator(std::string::const_iterator i) {
   double operand1 = PopToDoublestack();
   double operand2 = PopToDoublestack();
   switch (*i) {
@@ -309,7 +309,7 @@ void s21::Model::CalcOperator(std::string::const_iterator i) {
   }
 }
 
-void s21::Model::CalcFunction(std::string::const_iterator i) {
+void sfleta_::Model::CalcFunction(std::string::const_iterator i) {
   switch (*i) {
     case 'c':
       doubleStack.push(cos(PopToDoublestack()));
@@ -341,7 +341,7 @@ void s21::Model::CalcFunction(std::string::const_iterator i) {
   }
 }
 
-double s21::Model::Calculate(const double x_value) {
+double sfleta_::Model::Calculate(const double x_value) {
   for (auto i = outputString.begin(); i < outputString.end(); i++) {
     if (*i == 'x') {
       doubleStack.push(x_value);
@@ -365,14 +365,14 @@ double s21::Model::Calculate(const double x_value) {
   return PopToDoublestack();
 }
 
-void s21::Model::Replacer(const std::string& from, const std::string& to,
+void sfleta_::Model::Replacer(const std::string& from, const std::string& to,
                           std::string* src) {
   while ((*src).find(from) != std::string::npos) {
     (*src).replace((*src).find(from), from.length(), to);
   }
 }
 
-void s21::Model::ReplaceFuncName(std::string* inputStr) {
+void sfleta_::Model::ReplaceFuncName(std::string* inputStr) {
   Replacer("asin", "S", inputStr);
   Replacer("sin", "s", inputStr);
   Replacer("acos", "C", inputStr);
@@ -387,7 +387,7 @@ void s21::Model::ReplaceFuncName(std::string* inputStr) {
 
 // Вход: общая сумма кредита, срок, процентная ставка, тип (аннуитетный,
 // дифференцированный)
-double s21::Model::CreditCalc(double totalAmount, double period,
+double sfleta_::Model::CreditCalc(double totalAmount, double period,
                               double percentageRate, int mode) {
   double res = 0;
   double percent = (percentageRate / 100) / 12;
@@ -402,7 +402,7 @@ double s21::Model::CreditCalc(double totalAmount, double period,
   return res;
 }
 
-void s21::Model::SetInputString(const std::string& src) {
+void sfleta_::Model::SetInputString(const std::string& src) {
   ResetValues();
   inputString = src;
   PrepareToCalc();

@@ -13,13 +13,13 @@ class MainQT;
 }
 QT_END_NAMESPACE
 
-namespace s21 {
+namespace sfleta_ {
 class View : public QMainWindow {
     Q_OBJECT
 
  private:
     Ui::MainQT *ui;
-    s21::Controller *controller;
+    sfleta_::Controller *controller;
 
     inline bool IsEqualDouble(double x, double y) {
         return std::fabs(x - y) <= std::numeric_limits<double>::epsilon();
@@ -27,7 +27,7 @@ class View : public QMainWindow {
     inline bool LessOrEqualDouble(double x, double y) { return IsEqualDouble(x, y) || (x <= y); }
 
  public:
-    explicit View(s21::Controller *c, QWidget *parent = nullptr);
+    explicit View(sfleta_::Controller *c, QWidget *parent = nullptr);
     ~View();
 
  protected:
@@ -50,5 +50,5 @@ class View : public QMainWindow {
     void on_button_calc_credit_clicked();
     void on_button_clear_credit_clicked();
 };
-}  // namespace s21
+}  // namespace sfleta_
 #endif  // SRC_VIEW_H_

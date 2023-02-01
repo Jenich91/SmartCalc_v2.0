@@ -9,7 +9,7 @@
 #include <stack>
 #include <string>
 
-namespace s21 {
+namespace sfleta_ {
 class Model {
     enum operatorPrior { LOW, MID, HIGH, ULTRA };
 
@@ -59,5 +59,5 @@ class Model {
     void SetX(double inputX) { x = inputX; }
     void ResetValues();
 };
-}  // namespace s21
+}  // namespace sfleta_
 #endif  // SRC_MODEL_H_

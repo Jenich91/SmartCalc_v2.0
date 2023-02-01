@@ -2,7 +2,7 @@
 #define SRC_CONTROLLER_H_
 #include "model.h"
 
-namespace s21 {
+namespace sfleta_ {
 class Controller {
  private:
     Model* model;
@@ -17,6 +17,6 @@ class Controller {
     double GetResultCreditCalc(double totalAmount, double period, double percentageRate, int mode);
     void Reset() { model->ResetValues(); }
 };
-}  // namespace s21
+}  // namespace sfleta_
 // #include "controller.cc"
 #endif  // SRC_CONTROLLER_H_
